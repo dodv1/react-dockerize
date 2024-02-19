@@ -1,9 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker true
+    }
 
     environment {
         AWS_DEFAULT_REGION = 'us-west-1'
-        AWS_ACCOUNT_ID = '651699247958'
         ECR_REPO_NAME = 'dod-repo'
         ECR_IMAGE_TAG = 'latest'
         K8S_NAMESPACE = 'default'
@@ -41,6 +42,9 @@ pipeline {
             steps {
                 script {
                     withKubeConfig(credentialsId: 'kubeconfig', serverUrl: 'https://ED7F1731D741BA611A12AAAA90E6AB09.yl4.us-west-1.eks.amazonaws.com') {
+                        // Dry run for kubectl
+                        sh "kubectl apply --dry-run=client -f your-deployment-file.yaml -n $K8S_NAMESPACE"
+
                         // Update Kubernetes deployment
                         sh "kubectl set image deployment/$K8S_DEPLOYMENT_NAME $K8S_DEPLOYMENT_NAME=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$ECR_REPO_NAME:$ECR_IMAGE_TAG -n $K8S_NAMESPACE"
                     }
@@ -49,4 +53,3 @@ pipeline {
         }
     }
 }
-
