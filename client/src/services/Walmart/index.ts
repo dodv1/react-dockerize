@@ -7,7 +7,7 @@ const getDiscountProductsBycatalog = async (cIId: string) => {
   // const response = await fetch(url, options);
   // return response.json()
   const response = await axios({
-    url: 'http://localhost:5001/walmart/getDiscountsByCatalog/' + cIId,
+    url: 'http://54.83.161.163:5001/walmart/getDiscountsByCatalog/' + cIId,
     method: 'GET'
   });
   return response.data;
@@ -19,7 +19,7 @@ const getDiscountProducts = async () => {
   // const response = await fetch(url, options);
   // return response.json();
   const response = await axios({
-    url: 'http://localhost:5001/walmart/getDiscounts/',
+    url: 'http://54.83.161.163:5001/walmart/getDiscounts/',
     method: 'GET'
   });
   return response.data;
@@ -27,7 +27,7 @@ const getDiscountProducts = async () => {
 
 const getProductsBySearch = async (searchValue: string) => {
   const response = await axios({
-    url: `http://localhost:5001/walmart/search/${searchValue}`,
+    url: `http://54.83.161.163:5001/walmart/search/${searchValue}`,
     method: 'GET'
   });
   return response.data;
@@ -42,7 +42,7 @@ export {
 export const walmartApi = createApi({
   reducerPath: 'walmartApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.BASE_URL || 'http://3.85.130.194:8081:5001'
+    baseUrl: process.env.BASE_URL || 'http://54.83.161.163:8081:5001'
   }),
   keepUnusedDataFor: 30,
   endpoints: builder => ({
