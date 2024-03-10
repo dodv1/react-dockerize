@@ -42,7 +42,7 @@ export {
 export const walmartApi = createApi({
   reducerPath: 'walmartApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.BASE_URL || 'http://localhost:5001'
+    baseUrl: process.env.BASE_URL || 'http://3.85.130.194:8081:5001'
   }),
   keepUnusedDataFor: 30,
   endpoints: builder => ({
